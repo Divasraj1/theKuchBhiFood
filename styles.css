@@ -4,6 +4,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    
 }
 :root{
     --tenne-tawny: #d6510B;
@@ -14,6 +15,7 @@ body{
     font-size: 1.05rem;
     line-height: 1.6;
     font-family: 'Poppins',sans-serif;
+    background-image: url("food-bg.png");
 }
 
 /*  */
@@ -42,6 +44,7 @@ body{
     padding: 2rem;
     background: #fff;
     text-align: center;
+    background-image: url("food-bg.png");
 }
 .meal-search{
     margin: 2rem 0;
@@ -57,7 +60,31 @@ body{
 .search-control,.search-btn{
     width: 100%;
 }
-
+#random-food{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    
+}
+.random-meal-item{
+    display: flex;
+    width: 600px;
+    height: 300px;
+    box-shadow: 0 4px 21px -12px rgba(0,0,0,0.79);
+    align-items: center;
+    border-radius: 2rem;
+    background-color: white;
+}
+.random-meal-img > img{
+    width: 300px;
+    height: 100%;
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+}
+.random-meal-name{
+    margin: auto;
+}
 .search-control{
     padding: 0 1rem;
     font-size: 1.1rem;
@@ -85,6 +112,7 @@ body{
 .search-btn:hover{
     background-color: var(--tenne-tawny-dark);
 }
+
 .meal-result{
     margin-top: 4rem;
 }
@@ -96,6 +124,7 @@ body{
     overflow: hidden;
     box-shadow: 0 4px 21px -12px rgba(0,0,0,0.79);
     margin: 2rem 0;
+    background-color: white;
 }
 .meal-img img{
     width: 100%;
@@ -243,5 +272,8 @@ body{
 @media screen and (min-width: 992px){
     #meal{
         grid-template-columns: repeat(3,1fr);
+    }
+    .random-food{
+
     }
 }

@@ -2,12 +2,15 @@ const searchBtn = document.getElementById('search-btn');
 const mealList = document.getElementById('meal');
 const mealDetailsContent = document.querySelector('.meal-details-content');
 const recipeCloseBtn = document.getElementById('recipe-close-btn');
+const randomFood = document.getElementById('random-food');
 //event listeners
 searchBtn.addEventListener('click',getMealList);
 mealList.addEventListener('click',getMealRecipe);
 recipeCloseBtn.addEventListener('click',() =>{
     mealDetailsContent.parentElement.classList.remove('showRecipe');
 });
+randomFood.onload = loadRandomFood();
+randomFood.addEventListener('click',getMealRecipe);
 
 function getMealList(){
     let searchInputTxt = document.getElementById('search-input').value.trim();
@@ -70,4 +73,36 @@ function mealRecipeModal(meal){
     `;
     mealDetailsContent.innerHTML = html;
     mealDetailsContent.parentElement.classList.add('showRecipe');   
+}
+
+function loadRandomFood(e){
+    console.log("entered");
+    fetch('https://www.themealdb.com/api/json/v1/1/random.php')
+    .then(response => response.json())
+    .then(data => {
+        let html = "";
+        if(data.meals){
+            data.meals.forEach(meal => {
+                html += `
+                <div id="random-food">
+                <div class="random-meal-item" data-id = "${meal.idMeal}">
+                        <div class="random-meal-img">
+                            <img src="${meal.strMealThumb}" alt="food"/>
+                        </div>
+                        <div class="random-meal-name">
+                            <h3>${meal.strMeal}</h3>
+                            <a href="" class="recipe-btn">Get Recipe</a>
+                        </div>
+                </div>
+                </div>
+                `;
+            });
+            randomFood.classList.remove('notFound');
+        }
+        else{
+            html = "Sorry, couldn't find any meal, Check spelling or Try some other ingredient";
+            randomFood.classList.add('notFound');
+        }
+        randomFood.innerHTML = html;
+    }); 
 }
